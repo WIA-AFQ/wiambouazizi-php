@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rechercher un trajet</title>
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body class="body-search ">
+<nav>
+      <div class="logo">🚄 Voyagera</div>
+      <div class="links">
+        <a href="index.html">Homme</a>
+        <a href="search.html">Rechercher un trajet</a>
+        <a href="login.html">Se connecte </a>
+        <a href="creercompt.html">Créer un compte</a>
+        <a href="loginadmin.html">Esepace Admin</a>
+        <a href="trains/liste.html">Tableau de client</a>
+      </div>
+    </nav>
+  <div class="container">
+    <h2>Rechercher un trajet</h2>
+    <form action="results.html" method="GET">
+      <div class="form-group">
+        <label for="ville_depart">Ville de départ</label>
+        <input type="text" id="ville_depart" name="ville_depart" autocomplete="off" required>
+        <div class="suggestions" id="suggestions_depart"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="ville_arrivee">Ville d'arrivée</label>
+        <input type="text" id="ville_arrivee" name="ville_arrivee" autocomplete="off" required>
+        <div class="suggestions" id="suggestions_arrivee"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="date_depart">Date de départ</label>
+        <input type="date" id="date_depart" name="date_depart" required>
+      </div>
+
+      <div class="form-group">
+        <label for="classe">Classe</label>
+        <select id="classe" name="classe" required>
+          <option value="1ere">1ère classe</option>
+          <option value="2eme">2ème classe</option>
+        </select>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="passagers">Nombre de passagers</label>
+        <input type="number" id="passagers" name="passagers" min="1" max="10" required>
+      </div>
+
+      <div class="form-group full-width">
+        <button type="submit"><a href="results.html">Rechercher</a></button>
+      </div>
+    </form>
+  </div>
+
+  <script  >
+    const villes = ["Casablanca", "Rabat", "Fès", "Marrakech", "Tanger", "Agadir", "Oujda", "Kenitra", "Safi", "Tétouan"];
+
+    function setupAutocomplete(inputId, suggestionBoxId) {
+      const input = document.getElementById(inputId);
+      const suggestionBox = document.getElementById(suggestionBoxId);
+
+      input.addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+        suggestionBox.innerHTML = "";
+
+        if (value) {
+          const matches = villes.filter(ville => ville.toLowerCase().startsWith(value));
+          matches.forEach(ville => {
+            const div = document.createElement("div");
+            div.textContent = ville;
+            div.addEventListener("click", () => {
+              input.value = ville;
+              suggestionBox.innerHTML = "";
+            });
+            suggestionBox.appendChild(div);
+          });
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+          suggestionBox.innerHTML = "";
+        }
+      });
+    }
+
+    setupAutocomplete("ville_depart", "suggestions_depart");
+    setupAutocomplete("ville_arrivee", "suggestions_arrivee");
+  </script>
+
+</body>
+</html>

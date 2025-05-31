@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un Train</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', sans-serif;
+      background: transparent;
+      color: #333;
+      background: linear-gradient(145deg, #caa98d, #d2b49a);
+    }
+
+    h1 {
+      color: #f9f9f9;
+      text-align: center;
+    }
+
+    form {
+      background: rgb(217, 121, 73);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #453830;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+    }
+  </style>
+</head>
+<body>
+
+
+ <form id="reservationForm">
+    <h1>Ajouter un Train</h1>
+    <label for="numero">Numéro du train</label>
+    <input type="text" id="numero" name="numero" required />
+
+    <label for="depart">Ville de départ</label>
+    <input type="text" id="depart" name="depart" required />
+
+    <label for="arrivee">Ville d'arrivée</label>
+    <input type="text" id="arrivee" name="arrivee" required />
+
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" required />
+
+    <label for="heure">Heure</label>
+    <input type="time" id="heure" name="heure" required />
+
+    <label for="personnes">Nombre de personnes</label>
+    <input type="number" id="personnes" name="personnes" min="1" value="1" required />
+
+    <button type="submit"><a href="liste.html">Valider</a></button>
+  </form>
+</body>
+</html>

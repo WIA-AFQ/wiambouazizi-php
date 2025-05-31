@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Trains</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+     background: linear-gradient(145deg, #caa98d, #d2b49a);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0 60px 0;
+      box-sizing: border-box;
+    }
+
+    
+    .actions {
+      text-align: center;
+      margin: 20px 0;
+      margin-top: 80px;
+    }
+    .actions button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #373434d2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .actions button:hover {
+      background-color: #ffffff55;
+    }
+    table {
+      max-width: 1000px;
+      width: 100%;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      color: black;
+      box-sizing: border-box;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+       margin-top:50px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color:rgba(255, 104, 34, 0.89);
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+    iframe {
+      display: block;
+      width: 90%;
+      height: 300px;
+      margin: 20px auto;
+      border: none;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+     nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(236, 99, 14, 0.56);
+      backdrop-filter: blur(8px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+     
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 50px;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+     
+
+    footer {
+      background: rgba(236, 99, 14, 0.56);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      flex-shrink: 0;
+      border-radius: 0 0 10px 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      
+    }
+
+    footer button {
+      color:rgb(245, 245, 245);
+      background-color:rgb(175, 61, 8);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left:70%;
+    }
+
+    footer button:hover {
+      background-color: #364254;
+    }
+    .a{
+      text-decoration: none;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+      <div class="logo">🚄 Voyagera</div>
+      <div class="links">
+        <a href="index.html">Homme</a>
+        <a href="search.html">Rechercher un trajet</a>
+        <a href="login.html">Se connecte </a>
+        <a href="creercompt.html">Créer un compte</a>
+        <a href="loginadmin.html">Esepace Admin</a>
+        <a href="trains/liste.html">Tableau de client</a>
+      </div>
+    </nav>
+  <div class="actions">
+    <button onclick="window.location.href='ajoute.html'">Ajouter</button>
+    <button onclick="window.location.href='modifie.html'">Modifier</button>
+    <button onclick="window.location.href='suprime.html'">Supprimer</button>
+    <button onclick="window.location.href='recherch.html'">Rechercher</button>
+  </div>
+
+  <table>
+    <thead>
+        <tr>
+        <th>Train N°</th>
+        <th>Départ</th>
+        <th>Arrivée</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Personnes</th>
+      
+      </tr>
+    </thead>
+    <tbody id="trainTableBody">
+    
+    </tbody>
+  </table>
+
+ 
+<footer>
+  <button type="submit" ><a href="paiement.html" class="a">Valider</a></button>
+</footer>
+  <script>
+   
+    const trains = [
+    { numero: 'T101', depart: 'Casablanca', arrivee: 'Rabat', date: '2025-06-01', heure: '08:00', personnes: 1 },
+    { numero: 'T102', depart: 'Marrakech', arrivee: 'Fès', date: '2025-06-03', heure: '10:30', personnes: 2 }
+  ];
+
+    function chargerTrains() {
+      const tableBody = document.getElementById("trainTableBody");
+      tableBody.innerHTML = ""; 
+
+      trains.forEach(train => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${train.numero}</td>
+        <td>${train.depart}</td>
+        <td>${train.arrivee}</td>
+        <td>${train.date}</td>
+        <td>${train.heure}</td>
+        <td>${train.personnes}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function loadPage(page) {
+      document.getElementById("iframeContent").src = page;
+    }
+
+   
+    window.onload = chargerTrains;
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résultats des trains</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="style/style.css" />
+</head>
+<body class="body-results">
+
+
+     <nav>
+      <div class="logo">🚄 Voyagera</div>
+      <div class="links">
+        <a href="index.html">Homme</a>
+        <a href="search.html">Rechercher un trajet</a>
+        <a href="login.html">Se connecte </a>
+        <a href="creercompt.html">Créer un compte</a>
+        <a href="loginadmin.html">Esepace Admin</a>
+        <a href="trains/liste.html">Tableau de client</a>
+      </div>
+    </nav>
+
+<div class="table-ontier">
+  <h2>Matin</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Train N°</th>
+        <th>Heure</th>
+        <th>Départ</th>
+        <th>Arrivée</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableMatin">
+     
+    </tbody>
+  </table>
+</div>
+
+<div class="table-ontier">
+  <h2>Après-midi</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Train N°</th>
+        <th>Heure</th>
+        <th>Départ</th>
+        <th>Arrivée</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableAprem">
+   
+    </tbody>
+  </table>
+</div>
+ 
+  <script >
+     const trains = [
+  { numero: 'T101', heure: '08:00', depart: 'Casablanca', arrivee: 'Rabat', date: '2025-06-01' },
+  { numero: 'T102', heure: '10:30', depart: 'Marrakech', arrivee: 'Fès', date: '2025-06-01' },
+  { numero: 'T103', heure: '14:15', depart: 'Tanger', arrivee: 'Casablanca', date: '2025-06-01' }
+];
+
+const matinTable = document.getElementById('tableMatin');
+const apremTable = document.getElementById('tableAprem');
+
+trains.forEach(train => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>${train.numero}</td>
+    <td>${train.heure}</td>
+    <td>${train.depart}</td>
+    <td>${train.arrivee}</td>
+    <td>${train.date}</td>
+   <td><button onclick="window.location.href='confirmation.html'">Réserver</button></td>
+  `;
+
+ 
+  const heureTrain = parseInt(train.heure.split(':')[0]);
+  if (heureTrain < 12) {
+    matinTable.appendChild(row);
+  } else {
+    apremTable.appendChild(row);
+  }
+});
+
+  </script>
+
+</body>
+</html>
